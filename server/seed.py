@@ -25,25 +25,25 @@ def create_players():
 
     return players
 
-# def create_cards():
-#     cards = []
+def create_cards():
+    cards = []
 
-#     all_cards = mtgcard.all()
+    all_cards = mtgcard.all()
 
-#     for mtg_card in all_cards:
-
-#         card = Card(
-#             name = mtg_card.name,
-#             type = mtg_card.type,
-#             rarity = mtg_card.rarity,
-#             set = mtg_card.set,
-#             set_name = mtg_card.set_name,
-#             multiverse_id = mtg_card.multiverse_id,
-#             image_url = mtg_card.image_url
-#         )
-#         cards.append(card)
+    for mtg_card in all_cards:
+        if mtg_card.multiverse_id:
+            card = Card(
+                name = mtg_card.name,
+                type = mtg_card.type,
+                rarity = mtg_card.rarity,
+                set = mtg_card.set,
+                set_name = mtg_card.set_name,
+                multiverse_id = mtg_card.multiverse_id,
+                image_url = mtg_card.image_url
+            )
+            cards.append(card)
     
-#     return cards
+    return cards
 
 def create_ownerships():
     ownerships = []
@@ -98,10 +98,10 @@ if __name__ == '__main__':
         db.session.add_all(players)
         db.session.commit()
 
-        # print('Seeding cards...')
-        # cards = create_cards()
-        # db.session.add_all(cards)
-        # db.session.commit()
+        print('Seeding cards...')
+        cards = create_cards()
+        db.session.add_all(cards)
+        db.session.commit()
 
         print('Seeding ownerships...')
         ownerships = create_ownerships()
