@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 from random import randint, choice as rc
 from faker import Faker
 from app import app
@@ -24,23 +25,25 @@ def create_players():
 
     return players
 
-def create_cards():
-    cards = []
+# def create_cards():
+#     cards = []
 
-    for c in range(5):
-        mtg_card = mtgcard(randint(1, 1000))
-        card = Card(
-            name = mtg_card.name,
-            type = mtg_card.type,
-            rarity = mtg_card.rarity,
-            set = mtg_card.set,
-            set_name = mtg_card.set_name,
-            multiverse_id = mtg_card.multiverse_id,
-            image_url = mtg_card.image_url
-        )
-        cards.append(card)
+#     all_cards = mtgcard.all()
+
+#     for mtg_card in all_cards:
+
+#         card = Card(
+#             name = mtg_card.name,
+#             type = mtg_card.type,
+#             rarity = mtg_card.rarity,
+#             set = mtg_card.set,
+#             set_name = mtg_card.set_name,
+#             multiverse_id = mtg_card.multiverse_id,
+#             image_url = mtg_card.image_url
+#         )
+#         cards.append(card)
     
-    return cards
+#     return cards
 
 def create_ownerships():
     ownerships = []
@@ -56,9 +59,14 @@ def create_tournaments():
     tournaments = []
 
     for t in range(25):
+
+        year = int(fake.year())
+        month = int(fake.month())
+        day = int(fake.day_of_month())
+
         tournament = Tournament(
-            name = f'{fake.real_city_name()} {rc(tournament_suffixes)}',
-            date = fake.date(),
+            name = f'{fake.city()} {rc(tournament_suffixes)}',
+            date = date(year, month, day),
             location = fake.address()
         )
         tournaments.append(tournament)
@@ -78,4 +86,36 @@ def create_registrations():
 if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
-        print("Starting seed...")
+        print("Clearing db")
+        Player.query.delete()
+        Card.query.delete()
+        Ownership.query.delete()
+        Tournament.query.delete()
+        Registration.query.delete()
+
+        print('Seeding players...')
+        players = create_players()
+        db.session.add_all(players)
+        db.session.commit()
+
+        # print('Seeding cards...')
+        # cards = create_cards()
+        # db.session.add_all(cards)
+        # db.session.commit()
+
+        print('Seeding ownerships...')
+        ownerships = create_ownerships()
+        db.session.add_all(ownerships)
+        db.session.commit()
+
+        print('Seeding tournaments...')
+        tournaments = create_tournaments()
+        db.session.add_all(tournaments)
+        db.session.commit()
+
+        print('Seeding registrations...')
+        registrations = create_registrations()
+        db.session.add_all(registrations)
+        db.session.commit()
+
+        print('Database seeded successfully.')
