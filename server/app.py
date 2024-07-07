@@ -33,7 +33,7 @@ class Players(Resource):
 
             return make_response(new_player.to_dict(), 201)
         except Exception as exc:
-            return {"error": f"{exc}"}
+            return {"error": f"{exc}"}, 400
         
 class PlayersById(Resource):
     def get(self, id):
@@ -65,6 +65,54 @@ class PlayersById(Resource):
         if player:
             db.session.delete(player)
             db.session.commitj()
+
+            return make_response('', 204)
+        
+        return {"error": "404 Not Found"}, 404
+    
+class CardsById(Resource):
+    def get(self, id):
+        card = Card.query.filter_by(id = id).first()
+
+        if card:
+            return card.to_dict(), 200
+        
+        return {"error": "404 Not Found"}, 404
+    
+class Ownerships(Resource):
+    def get(self):
+        ownerships = Ownership.query.all()
+
+        if ownerships:
+            ownerships_response = [ownership.to_dict() for ownership in ownerships]
+
+            return ownerships_response, 200
+        
+        return {"error": "404 Not Found"}, 404
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_ownership = Ownership(
+                player_id = data['player_id'],
+                card_id = data['card_id']
+            )
+
+            db.session.add(new_ownership)
+            db.session.commit()
+            
+            return make_response(new_ownership.to_dict(), 201)
+        except Exception as exc:
+            return {"error": f"{exc}"}, 400
+    
+class OwnershipsById(Resource):
+    def delete(self, id):
+        ownership = Ownership.query.filter_by(id = id).first()
+
+        if ownership:
+            db.session.delete(ownership)
+            db.session.commit()
 
             return make_response('', 204)
         
