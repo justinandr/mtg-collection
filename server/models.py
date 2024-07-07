@@ -31,8 +31,8 @@ class Ownership(db.Model, SerializerMixin):
     __tablename__ = 'ownerships'
 
     id = db.Column(db.Integer, primary_key = True)
-    player_id = db.Column(db.Integer, ForeignKey = 'players.id', nullable = False)
-    card_id = db.Column(db.Integer, ForeignKey = 'cards.id', nullable = False)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
+    card_id = db.Column(db.Integer, db.ForeignKey('cards.id'), nullable = False)
 
     def __repr__(self):
         return f'<Ownership> Player ID: {self.player_id}, Card ID: {self.card_id}'
@@ -52,8 +52,8 @@ class Registration(db.Model, SerializerMixin):
     __tablename__ = 'registrations'
 
     id = db.Column(db.Integer, primary_key = True)
-    player_id = db.Column(db.Integer, ForeignKey = 'players.id', nullable = False)
-    tournament_id = db.Column(db.Integer, ForeignKey = 'tournaments.id', nullable = False)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
+    tournament_id = db.Column(db.Integer, db.ForeignKey('tournaments.id'), nullable = False)
 
     def __repr__(self):
         return f'<Registration> Player ID: {self.player_id}, Tournament ID: {self.tournament_id}'
