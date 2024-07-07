@@ -34,6 +34,41 @@ class Players(Resource):
             return make_response(new_player.to_dict(), 201)
         except Exception as exc:
             return {"error": f"{exc}"}
+        
+class PlayersById(Resource):
+    def get(self, id):
+        player = Player.query.filter_by(id = id).first()
+
+        if player:
+            return player.to_dict(), 200
+        
+        return {"error": "404 Not Found"}, 404 
+    
+    def patch(self, id):
+        player = Player.query.filter_by(id = id).first()
+        data = request.get_json()
+
+        if player:
+            for attr in data:
+                setattr(player, attr, data[attr])
+
+            db.session.add(player)
+            db.session.commit()
+
+            return make_response(player.to_dict(), 200)
+        
+        return {"error": "404 Not Found"}, 404
+    
+    def delete(self, id):
+        player = Player.query.filter_by(id = id)
+
+        if player:
+            db.session.delete(player)
+            db.session.commitj()
+
+            return make_response('', 204)
+        
+        return {"error": "404 Not Found"}, 404
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
