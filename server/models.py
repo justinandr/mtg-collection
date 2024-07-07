@@ -23,6 +23,7 @@ class Card(db.Model, SerializerMixin):
     set = db.Column(db.String, nullable = False)
     set_name = db.Column(db.String, nullable = False)
     multiverse_id = db.Column(db.Integer, nullable = False)
+    image_url = db.Column(db.String, nullable = False)
 
     def __repr__(self):
         return f'<Card> Name: {self.name}, Type: {self.type}, Rarity: {self.rarity}, Set Name: {self.set_name}, Multiverse ID: {self.multiverse_id}'
