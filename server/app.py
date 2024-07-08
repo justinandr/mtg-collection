@@ -155,5 +155,53 @@ class TournamentsById(Resource):
 
             return make_response('', 204)
 
+class Registrations(Resource):
+    def get(self):
+        registrations = Registration.query.all()
+
+        if registrations:
+            registrations_response = [registration.to_dict() for registration in registrations]
+
+            return registrations_response, 200
+        
+        return {"error": "404 Not Found"}, 404
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_registration = Registration(
+                player_id = data['player_id'],
+                tournament_id = data['tournament_id']
+            )
+
+            db.session.add(new_registration)
+            db.session.commit()
+        except Exception as exc:
+            return {"error": f"{exc}"}, 400
+        
+class RegistrationsById(Resource):
+    def delete(self, id):
+        registration = Registration.query.filter_by(id = id).first()
+
+        if registration:
+            db.session.delete(registration)
+            db.session.commit()
+
+            return make_response('', 204)
+        
+        return {"error": "404 Not Found"}, 404
+    
+api.add_resource(Home, '/')
+api.add_resource(Players, '/players')
+api.add_resource(PlayersById, '/players/<int:id>')
+api.add_resource(CardsById, '/cards/<int:id>')
+api.add_resource(Ownerships, '/ownerships')
+api.add_resource(OwnershipsById, 'ownerships/<int:id>')
+api.add_resource(Tournaments, '/tournaments')
+api.add_resource(TournamentsById, '/tournaments/<int:id>')
+api.add_resource(Registrations, '/registrations')
+api.add_resource(RegistrationsById, '/registrations/<int:id>')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
