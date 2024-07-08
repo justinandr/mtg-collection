@@ -117,6 +117,43 @@ class OwnershipsById(Resource):
             return make_response('', 204)
         
         return {"error": "404 Not Found"}, 404
+    
+class Tournaments(Resource):
+    def get(self):
+        tournaments = Tournament.query.all()
+
+        if tournaments:
+            tournaments_response = [tournament.to_dict() for tournament in tournaments]
+            return tournaments_response, 200
+        
+        return {"error": "404 Not Found"}, 404
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_tournament = Tournament(
+                name = data['name'],
+                date = data['date'],
+                location = data['location']
+            )
+
+            db.session.add(new_tournament)
+            db.session.commit()
+
+            return make_response(new_tournament.to_dict(), 201)
+        except Exception as exc:
+            return {"error": f"{exc}"}, 400
+        
+class TournamentsById(Resource):
+    def delete(self, id):
+        tournament = Tournament.query.filter_by(id = id).first()
+
+        if tournament:
+            db.session.delete(tournament)
+            db.session.commit()
+
+            return make_response('', 204)
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
