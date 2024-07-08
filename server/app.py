@@ -160,7 +160,7 @@ class Registrations(Resource):
         registrations = Registration.query.all()
 
         if registrations:
-            registrations_response = [registration.to_dict() for registration in registrations]
+            registrations_response = [registration.to_dict(rules = ('-players',)) for registration in registrations]
 
             return registrations_response, 200
         
