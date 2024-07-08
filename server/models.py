@@ -7,7 +7,7 @@ from config import db
 class Player(db.Model, SerializerMixin):
     __tablename__ = 'players'
 
-    serialize_rules = ('registrations.players', 'ownerships.players', 'cards.palyers')
+    serialize_rules = ('-registrations.players', '-ownerships.card')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
@@ -16,7 +16,7 @@ class Player(db.Model, SerializerMixin):
     registrations = db.relationship('Registration', back_populates = 'players', cascade = 'all, delete-orphan')
     ownerships = db.relationship('Ownership', back_populates = 'players', cascade = 'all, delete-orphan')
 
-    cards = association_proxy('ownerships', 'cards', creator = lambda card_obj: Ownership(card = card_obj))
+    cards = association_proxy('ownerships', 'card', creator = lambda card_obj: Ownership(card = card_obj))
 
     @validates('name')
     def validate_name(self, key, name):
@@ -29,6 +29,8 @@ class Player(db.Model, SerializerMixin):
     
 class Card(db.Model, SerializerMixin):
     __tablename__ = 'cards'
+
+    serialize_rules = ('-ownerships.cards', '-players')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
@@ -46,6 +48,8 @@ class Card(db.Model, SerializerMixin):
     
 class Ownership(db.Model, SerializerMixin):
     __tablename__ = 'ownerships'
+
+    serialize_rules = ('-players', '-cards.ownerships')
 
     id = db.Column(db.Integer, primary_key = True)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
@@ -88,6 +92,8 @@ class Tournament(db.Model, SerializerMixin):
     
 class Registration(db.Model, SerializerMixin):
     __tablename__ = 'registrations'
+
+    serialize_rules = ('-players.registrations', '-tournaments.registrations')
 
     id = db.Column(db.Integer, primary_key = True)
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
