@@ -59,7 +59,15 @@ def create_ownerships():
 def create_tournaments():
     tournaments = []
 
-    for t in range(25):
+    gpr = Tournament(
+        name = 'Grand Prix Richmond',
+        date = date(2014, 3, 10),
+        location = '403 N 3rd St, Richmond, VA 23219'
+    )
+
+    tournaments.append(gpr)
+
+    for t in range(24):
 
         year = int(fake.year())
         month = int(fake.month())
