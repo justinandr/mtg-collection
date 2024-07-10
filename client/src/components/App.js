@@ -1,8 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
 
 function App() {
-  return <h1>Project Client</h1>;
+
+    const [players, setPlayers] = useState([])
+    const [tournaments, setTournaments] = useState([])
+
+    useEffect(() => {
+        fetch('/players')
+        .then(res => res.json())
+        .then(data => setPlayers(data))
+    }, [])
+
+    useEffect(() => {
+        fetch('/tournaments')
+        .then(res => res.json())
+        .then(data => setTournaments(data))
+    }, [])
+
+    console.log(players)
+    console.log(tournaments)
+
+  return (
+    <>
+        <Outlet context={{players, setPlayers, tournaments, setTournaments}} />
+    </>
+  )
 }
 
 export default App;

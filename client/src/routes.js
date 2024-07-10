@@ -5,6 +5,8 @@ import Cards from "./pages/Cards";
 import Tournaments from "./pages/Tournaments";
 import TournamentDetail from "./pages/TournamentDetail";
 
+const id = ''
+
 const routes = [
     {
         path: '/',
@@ -33,3 +35,5 @@ const routes = [
         ]
     }
 ]
+
+export default routes
