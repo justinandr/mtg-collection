@@ -1,6 +1,8 @@
 import React from 'react'
 import Button from '@mui/material/Button'
 
+// Something like a carousel
+
 function Home() {
   return (
     <div>
