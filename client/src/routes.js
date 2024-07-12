@@ -29,7 +29,7 @@ const routes = [
                 element: <Tournaments />
             },
             {
-                path: `/tournaments/${id}`,
+                path: '/tournaments/:id',
                 element: <TournamentDetail />
             }
         ]
