@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from '../components/NavBar'
 import Button from '@mui/material/Button'
 
 // Something like a carousel
@@ -6,8 +7,7 @@ import Button from '@mui/material/Button'
 function Home() {
   return (
     <div>
-        <h1>Home</h1>
-        <Button variant="contained">Hello world</Button>
+        <NavBar />
     </div>
   )
 }

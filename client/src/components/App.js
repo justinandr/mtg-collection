@@ -18,9 +18,6 @@ function App() {
         .then(data => setTournaments(data))
     }, [])
 
-    console.log(players)
-    console.log(tournaments)
-
   return (
     <>
         <Outlet context={{players, setPlayers, tournaments, setTournaments}} />
