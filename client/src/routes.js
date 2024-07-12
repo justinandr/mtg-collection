@@ -1,6 +1,7 @@
 import App from "./components/App";
 import Home from "./pages/Home";
 import Players from "./pages/Players";
+import PlayerDetail from "./components/PlayerDetail";
 import Cards from "./pages/Cards";
 import Tournaments from "./pages/Tournaments";
 import TournamentDetail from "./pages/TournamentDetail";
@@ -19,6 +20,10 @@ const routes = [
             {
                 path: '/players',
                 element: <Players />
+            },
+            {
+                path: '/players/:id',
+                element: <PlayerDetail />
             },
             {
                 path: '/cards',

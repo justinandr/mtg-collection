@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, CardActions, CardContent, Button, Typography, Box } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 function PlayerCard({player}) {
 
@@ -7,11 +8,11 @@ function PlayerCard({player}) {
         <Box sx={{minWidth: 275}}>
             <Card variant='outlined'>
                 <CardContent>
-                    <Typography variant='h2' >{player.name}</Typography>
-                    <Typography variant='h5'>Tournaments Played: {player.tournaments_played}</Typography>
+                    <Typography variant='h4' >{player.name}</Typography>
+                    <Typography variant='h6'>Tournaments Played: {player.tournaments_played}</Typography>
                 </CardContent>
                 <CardActions>
-                    <Button>View More</Button>
+                    <Button component={Link} to={`/players/${player.id}`}>View More</Button>
                 </CardActions>
             </Card>
         </Box>
