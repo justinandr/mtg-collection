@@ -18,7 +18,7 @@ function Players() {
                 <Grid2 container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
                     {players.map(player => {
                         return (
-                            <Grid2 xs={4}>
+                            <Grid2 key={player.id} xs={4}>
                                 <PlayerCard 
                                     key = {player.id} 
                                     player = {player} 
