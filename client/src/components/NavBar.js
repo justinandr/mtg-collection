@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 
 function NavBar() {
 
-    const navItems = ['Players', 'Cards', 'Tournaments']
-
     return (
         <Box sx={{ display: 'flex', backgroundColor: 'black' }}>
             <AppBar position='sticky' component="nav" >
