@@ -31,9 +31,9 @@ function PlayerDetail() {
     return (
         <>
             <NavBar />
-            <Typography variant='h2'>{player.name}</Typography>
+            <Typography gutterBottom variant='h2'>{player.name}</Typography>
             <Typography variant='h5' color='text.secondary'>Tournaments played: {player.tournaments_played}</Typography>
-            <Accordion>
+            <Accordion sx={{mt: '25px'}}>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1-content"
