@@ -11,9 +11,13 @@ function CardCard({card}) {
                 image={card.image_url}
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h6" component="div">
                 {card.name}
                 </Typography>
+                <Typography variant='body1' >Type: {card.type}</Typography>
+                <Typography variant='body1' >Rarity: {card.rarity}</Typography>
+                <Typography variant='body1' >Set: {card.set_name}</Typography>
+                <Typography variant='body1' >Multiverse ID: {card.multiverse_id}</Typography>
             </CardContent>
         </Card>
     )

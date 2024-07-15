@@ -7,7 +7,7 @@ from config import db
 class Player(db.Model, SerializerMixin):
     __tablename__ = 'players'
 
-    serialize_rules = ('-registrations.players', '-ownerships.card')
+    serialize_rules = ('-registrations.players', '-ownerships.card', 'registrations.tournaments')
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
@@ -17,6 +17,7 @@ class Player(db.Model, SerializerMixin):
     ownerships = db.relationship('Ownership', back_populates = 'players', cascade = 'all, delete-orphan')
 
     cards = association_proxy('ownerships', 'card', creator = lambda card_obj: Ownership(card = card_obj))
+    tournaments = association_proxy('registrations', 'tournaments', creator = lambda tourn_obj: Registration(tournament = tourn_obj))
 
     @validates('name')
     def validate_name(self, key, name):
@@ -81,6 +82,8 @@ class Tournament(db.Model, SerializerMixin):
     date = db.Column(db.DateTime, nullable = False)
     location = db.Column(db.String, nullable = False)
 
+    registrations = db.relationship('Registration', back_populates = 'tournaments', cascade = 'all, delete-orphan')
+
     @validates('name')
     def validate_name(self, key, name):
         if len(name) > 40:
@@ -100,6 +103,7 @@ class Registration(db.Model, SerializerMixin):
     tournament_id = db.Column(db.Integer, db.ForeignKey('tournaments.id'), nullable = False)
 
     players = db.relationship('Player', back_populates = 'registrations')
+    tournaments = db.relationship('Tournament', back_populates = 'registrations')
 
     @validates('player_id')
     def validate_player_id(self, key, id):

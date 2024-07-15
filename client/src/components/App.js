@@ -5,6 +5,7 @@ function App() {
 
     const [players, setPlayers] = useState([])
     const [tournaments, setTournaments] = useState([])
+    const [registrations, setRegistrations] = useState([])
 
     useEffect(() => {
         fetch('/players')
@@ -16,11 +17,17 @@ function App() {
         fetch('/tournaments')
         .then(res => res.json())
         .then(data => setTournaments(data))
+    }, [registrations])
+
+    useEffect(() => {
+        fetch('/registrations')
+        .then(res => res.json())
+        .then(data => setRegistrations(data))
     }, [])
 
   return (
     <>
-        <Outlet context={{players, setPlayers, tournaments, setTournaments}} />
+        <Outlet context={{players, setPlayers, tournaments, setTournaments, registrations, setRegistrations}} />
     </>
   )
 }
