@@ -12,9 +12,9 @@ function Players() {
     const {players} = useOutletContext()
 
     return (
-        <div>
+        <>
             <NavBar />
-            <Box sx={{width: '100%'}}>
+            <Box sx={{width: '100%', mt: '10px'}}>
                 <Grid2 container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
                     {players.map(player => {
                         return (
@@ -28,7 +28,7 @@ function Players() {
                     })}
                 </Grid2>
             </Box>
-        </div>
+        </>
     )
 }
 
