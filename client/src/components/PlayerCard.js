@@ -7,7 +7,6 @@ function PlayerCard({player}) {
     return (
         <Box sx={{minWidth: 275}}>
             <Card variant='outlined'>
-                <CardActionArea>
                     <CardContent>
                         <Typography variant='h4' >{player.name}</Typography>
                         <Typography variant='h6'>Tournaments Played: {player.tournaments_played}</Typography>
@@ -15,7 +14,6 @@ function PlayerCard({player}) {
                     <CardActions>
                         <Button component={Link} to={`/players/${player.id}`} player={player} >View More</Button>
                     </CardActions>
-                </CardActionArea>
             </Card>
         </Box>
     )
