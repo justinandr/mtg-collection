@@ -5,7 +5,7 @@ import CardCard from '../components/CardCard'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import TournamentCard from '../components/TournamentCard'
+import RegistrationCard from '../components/RegistrationCard'
 
 function PlayerDetail() {
 
@@ -47,7 +47,7 @@ function PlayerDetail() {
                             {player_registrations.map(registration => {
                                 return (
                                     <Grid2 key={registration.id} xs={16}>
-                                        <TournamentCard 
+                                        <RegistrationCard 
                                             key={registration.id}
                                             regId={registration.id}
                                             tournament={registration.tournaments}

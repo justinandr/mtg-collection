@@ -1,10 +1,8 @@
 import React from 'react'
 import { Card, CardContent, Typography, CardActions, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
-function TournamentCard({ tournament, handleDelete, regId }) {
-
+function RegistrationCard({tournament, handleDelete, regId}) {
     return (
         <Card sx={{minWidth: 275}}>
             <CardContent>
@@ -13,11 +11,10 @@ function TournamentCard({ tournament, handleDelete, regId }) {
                 <Typography variant='body1'>Location: {tournament.location}</Typography>
             </CardContent>
             <CardActions>
-                <IconButton onClick={() => handleDelete(tournament.id)}><DeleteIcon /></IconButton>
-                <IconButton><EditIcon /></IconButton>
+                <IconButton onClick={() => handleDelete(regId)}><DeleteIcon /></IconButton>
             </CardActions>
         </Card>
     )
 }
 
-export default TournamentCard
+export default RegistrationCard

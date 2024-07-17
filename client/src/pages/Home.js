@@ -17,7 +17,7 @@ function Home() {
                             <CardActionArea component={Link} to='/players'>
                                 <CardContent>
                                     <Typography gutterBottom textAlign={'center'} variant='h4'>Players</Typography>
-                                    <Typography gutterBottom textAlign={'center'} variant='body1' color='text.secondary'>View a list of players, their card collection and reigstrations.</Typography>
+                                    <Typography gutterBottom textAlign={'center'} variant='body1' color='text.secondary'>View all players, their cards and reigstrations.</Typography>
                                 </CardContent>
                             </CardActionArea>
                         </Card>

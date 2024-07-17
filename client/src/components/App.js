@@ -23,7 +23,7 @@ function App() {
         fetch('/registrations')
         .then(res => res.json())
         .then(data => setRegistrations(data))
-    }, [])
+    }, [tournaments])
 
   return (
     <>

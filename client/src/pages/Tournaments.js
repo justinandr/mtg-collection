@@ -2,20 +2,25 @@ import React from 'react'
 import NavBar from '../components/NavBar'
 import { useOutletContext } from 'react-router-dom'
 import TournamentCard from '../components/TournamentCard'
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-
-
-// Display all tournaments in chronological order. Button leading to TournamentDetail / Registration
 
 function Tournaments() {
 
     const { tournaments, setTournaments } = useOutletContext()
 
+    function handleDeleteTournament(id){
+        fetch(`/tournaments/${id}`, {
+            method: 'DELETE'
+        })
+        .then(() => setTournaments(tournaments => tournaments.filter(filterTourn => filterTourn.id !== id)))
+    }
+
     return (
         <>
             <NavBar />
                 <Typography variant='h2'>Tournaments</Typography>
+                <Button variant='outlined'>Add Tournament</Button>
                 <Box sx={{width: '100%', mt: '10px'}}>
                     <Grid2 container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
                         {tournaments.map(tournament => {
@@ -23,7 +28,8 @@ function Tournaments() {
                                 <Grid2 key={tournament.id} xs={4}>
                                     <TournamentCard 
                                         key = {tournament.id} 
-                                        tournament = {tournament} 
+                                        tournament = {tournament}
+                                        handleDelete={handleDeleteTournament} 
                                     />
                                 </Grid2>
                             )
