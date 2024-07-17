@@ -33,6 +33,17 @@ function CardSearchForm() {
         setTypeOpen(true)
     }
 
+    function handleSubmit(event){
+        event.preventDefault()
+        const formData = {
+            name: name,
+            rarity: rarity,
+            type: type
+        }
+
+        console.log(formData)
+    }
+
     return (
         <Box
         sx={{
@@ -44,8 +55,10 @@ function CardSearchForm() {
         >
             <Typography variant='h4'>Card Search</Typography>
             <Box
+            noValidate
             component='form'
             sx={{mt: '20px'}}
+            onSubmit={handleSubmit}
             >
                 <Grid2 container spacing={2}>
                     <Grid2 xs={12} sm={6}>
@@ -94,9 +107,9 @@ function CardSearchForm() {
                                 )
                             })}
                         </Select>
-                    <Grid2 xs={12} sx={{mt: '25px'}}>
-                        <Button fullWidth variant='contained'>Submit</Button>
                     </Grid2>
+                    <Grid2 xs={12} sx={{mt: '15px'}}>
+                        <Button type='submit' fullWidth variant='contained'>Submit</Button>
                     </Grid2>
                 </Grid2>
             </Box>
