@@ -4,7 +4,6 @@ import { useOutletContext } from 'react-router-dom'
 import TournamentCard from '../components/TournamentCard'
 import { Box, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import TournamentEditForm from '../components/TournamentEditForm'
 import AddTournamentForm from '../components/AddTournamentForm'
 
 function Tournaments() {
@@ -17,10 +16,6 @@ function Tournaments() {
             method: 'DELETE'
         })
         .then(() => setTournaments(tournaments => tournaments.filter(filterTourn => filterTourn.id !== id)))
-    }
-
-    function handleAddTournament(event){
-        event.preventDefault()
     }
 
     return (

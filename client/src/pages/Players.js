@@ -5,8 +5,6 @@ import NavBar from '../components/NavBar'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import { Box, Typography } from '@mui/material'
 
-// Display all players with options to search / maybe filter
-
 function Players() {
 
     const {players} = useOutletContext()

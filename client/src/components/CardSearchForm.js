@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, TextField, Select, Button, MenuItem, Typography, InputLabel } from '@mui/material'
+import { Box, TextField, Select, Button, MenuItem, Typography, InputLabel, Pagination } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import CardCard from '../components/CardCard'
 
@@ -7,16 +7,9 @@ function CardSearchForm() {
 
     const [name, setName] = useState('')
     const [rarity, setRarity] = useState('')
-    const [type, setType] = useState('')
     const [rarityOpen, setRarityOpen] = useState(false)
-    const [typeOpen, setTypeOpen] = useState(false)
     const [searchResults, setSearchResults] = useState([])
 
-    const types = ["Artifact", "Battle", "Conspiracy" ,"Creature" ,"Dragon" ,
-        "Elemental", "Enchantment", "Goblin", "Hero", "instant", "Instant", 
-        "Jaguar", "Kindred", "Knights", "Land", "Legend", "Phenomenon", "Plane", 
-        "Planeswalker", "Scheme", "Sorcery", "Stickers", "Summon", "Tribal", 
-        "Universewalker", "Vanguard", "Wolf"]
     const rarities = ['Common', 'Uncommon', 'Rare', 'Mythic']
 
     function handleRarityClose(){
@@ -27,20 +20,11 @@ function CardSearchForm() {
         setRarityOpen(true)
     }
 
-    function handleTypeClose(){
-        setTypeOpen(false)
-    }
-
-    function handleTypeOpen(){
-        setTypeOpen(true)
-    }
-
     function handleSubmit(event){
         event.preventDefault()
         const formData = {
             name: name,
             rarity: rarity,
-            type: type
         }
 
         fetch('/cards/search', {
@@ -52,6 +36,9 @@ function CardSearchForm() {
         })
         .then(res => res.json())
         .then(data => setSearchResults(data))
+
+        setName('')
+        setRarity('')
     }
 
     return (
@@ -100,25 +87,6 @@ function CardSearchForm() {
                             })}
                         </Select>
                     </Grid2>
-                    {/* <Grid2 xs={12}>
-                        <InputLabel id='type'>Type</InputLabel>
-                        <Select
-                            fullWidth
-                            labelId='type'
-                            label='Type'
-                            open={typeOpen}
-                            onClose={handleTypeClose}
-                            onOpen={handleTypeOpen}
-                            value={type}
-                            onChange={(e) => setType(e.target.value)}
-                        >
-                            {types.map(type => {
-                                return(
-                                    <MenuItem key={type} value={type}>{type}</MenuItem>
-                                )
-                            })}
-                        </Select>
-                    </Grid2> */}
                     <Grid2 xs={12} sx={{mt: '15px'}}>
                         <Button type='submit' fullWidth variant='contained'>Submit</Button>
                     </Grid2>
@@ -127,13 +95,13 @@ function CardSearchForm() {
         </Box> 
             <Box sx={{width: '100%', mt: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <Grid2 container rowSpacing={4} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
-                    {searchResults ? searchResults.map(card => {
+                    {Array.isArray(searchResults) ? searchResults.map(card => {
                         return (
                             <Grid2 key={card.id} xs={3}>
                                 <CardCard key={card.id} card={card} />
                             </Grid2>
                         )
-                    }) : null}
+                    }) : <Typography variant='h6'>No Matches Found...</Typography>}
                 </Grid2>
             </Box>
         </>

@@ -86,8 +86,12 @@ class CardSearch(Resource):
     def post(self):
         data = request.get_json()
         
-        cards = Card.query.filter_by(name = data['name']).filter_by(rarity = data['rarity']).all()
-
+        if data['name'] and data['rarity']:
+            cards = Card.query.filter_by(name = data['name']).filter_by(rarity = data['rarity']).all()
+        elif data['name'] and not data['rarity']:
+            cards = Card.query.filter_by(name = data['name']).all()
+        elif not data['name'] and data['rarity']:
+            cards = Card.query.filter_by(rarity = data['rarity'])
         if cards:
             card_response = [card.to_dict() for card in cards]
             
