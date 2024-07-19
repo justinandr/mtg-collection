@@ -100,7 +100,7 @@ function CardSearchForm() {
                             })}
                         </Select>
                     </Grid2>
-                    <Grid2 xs={12}>
+                    {/* <Grid2 xs={12}>
                         <InputLabel id='type'>Type</InputLabel>
                         <Select
                             fullWidth
@@ -118,7 +118,7 @@ function CardSearchForm() {
                                 )
                             })}
                         </Select>
-                    </Grid2>
+                    </Grid2> */}
                     <Grid2 xs={12} sx={{mt: '15px'}}>
                         <Button type='submit' fullWidth variant='contained'>Submit</Button>
                     </Grid2>

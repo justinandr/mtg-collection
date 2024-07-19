@@ -5,7 +5,6 @@ from faker import Faker
 from app import app
 from models import db, Player, Card, Ownership, Tournament, Registration
 from datetime import date
-from mtgsdk import Card as mtgcard
 
 fake = Faker()
 
