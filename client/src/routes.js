@@ -4,7 +4,6 @@ import Players from "./pages/Players";
 import PlayerDetail from "./pages/PlayerDetail";
 import Cards from "./pages/Cards";
 import Tournaments from "./pages/Tournaments";
-import TournamentDetail from "./pages/TournamentDetail";
 
 const routes = [
     {
@@ -30,10 +29,6 @@ const routes = [
             {
                 path: '/tournaments',
                 element: <Tournaments />
-            },
-            {
-                path: '/tournaments/:id',
-                element: <TournamentDetail />
             }
         ]
     }

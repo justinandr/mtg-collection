@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 
-function TournamentEditForm({id}) {
+function AddTournamentForm() {
 
     const [name, setName] = useState('')
     const [date, setDate] = useState('')
@@ -17,7 +17,7 @@ function TournamentEditForm({id}) {
         }
 
         fetch(`/tournaments/${id}`, {
-            method: 'PATCH',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -30,13 +30,13 @@ function TournamentEditForm({id}) {
     return (
         <Box
             sx={{
-                marginTop: 2,
+                marginTop: 8,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'left',
+                alignItems: 'center',
             }}
         >
-            <Typography variant='h6'>Add Tournament</Typography>
+            <Typography variant='h6'>Edit Tournament</Typography>
             <Box
                 noValidate
                 component='form'
@@ -77,4 +77,4 @@ function TournamentEditForm({id}) {
     )
 }
 
-export default TournamentEditForm
+export default AddTournamentForm
