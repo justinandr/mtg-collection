@@ -7,13 +7,11 @@ import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import RegistrationCard from '../components/RegistrationCard'
 
-function PlayerDetail({reg}) {
+function PlayerDetail() {
 
     const params = useParams()
     const [player, setPlayer] = useState({})
     const {registrations, setRegistrations} = useOutletContext()
-
-    console.log(reg)
 
     useEffect(() => {
         fetch(`/players/${params.id}`)
@@ -22,7 +20,6 @@ function PlayerDetail({reg}) {
     }, [params.id])
 
     const player_cards = player.ownerships ? player.ownerships.map(card => card.cards) : []
-    const player_registrations = registrations.filter(reg => reg.player_id === player.id)
 
     function handleDeleteReg(id){
         fetch(`/registrations/${id}`, {
@@ -45,8 +42,8 @@ function PlayerDetail({reg}) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Box sx={{width: '100%'}}>
-                        {registrations ? <Grid2 container rowSpacing={5} columnSpacing={5}>
-                            {player_registrations.map(registration => {
+                        {player.registrations ? <Grid2 container rowSpacing={5} columnSpacing={5}>
+                            {player.registrations.map(registration => {
                                 return (
                                     <Grid2 key={registration.id} xs={16}>
                                         <RegistrationCard 

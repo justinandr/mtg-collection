@@ -12,7 +12,7 @@ function PlayerCard({player, registrations}) {
                         <Typography variant='h6'>Tournaments Played: {player.tournaments_played}</Typography>
                     </CardContent>
                     <CardActions>
-                        <Button component={Link} to={`/players/${player.id}`} player={player} reg={registrations} >View More</Button>
+                        <Button component={Link} to={`/players/${player.id}`}>View More</Button>
                     </CardActions>
             </Card>
         </Box>
