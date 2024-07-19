@@ -7,7 +7,7 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 
 function Tournaments() {
 
-    const { tournaments, setTournaments } = useOutletContext()
+    const { tournaments, setTournaments, players } = useOutletContext()
 
     function handleDeleteTournament(id){
         fetch(`/tournaments/${id}`, {
@@ -29,7 +29,8 @@ function Tournaments() {
                                     <TournamentCard 
                                         key = {tournament.id} 
                                         tournament = {tournament}
-                                        handleDelete={handleDeleteTournament} 
+                                        handleDelete={handleDeleteTournament}
+                                        players={players} 
                                     />
                                 </Grid2>
                             )

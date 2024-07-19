@@ -1,10 +1,15 @@
-import React from 'react'
-import { Card, CardContent, Typography, CardActions, IconButton, Button } from '@mui/material'
+import React, { useState } from 'react'
+import { Card, CardContent, Typography, CardActions, Button } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import TournamentEditForm from './TournamentEditForm';
+import RegistrationForm from './RegistrationForm';
 
-function TournamentCard({ tournament, handleDelete, regId }) {
+function TournamentCard({ tournament, handleDelete, players }) {
+
+    const [showEditForm, setShowEditForm] = useState(false)
+    const [showRegisterForm, setShowRegisterForm] = useState(false)
 
     return (
         <Card sx={{minWidth: 275}}>
@@ -15,9 +20,11 @@ function TournamentCard({ tournament, handleDelete, regId }) {
             </CardContent>
             <CardActions>
                 <Button onClick={() => handleDelete(tournament.id)} startIcon={<DeleteIcon />}>Delete</Button>
-                <Button startIcon={<EditIcon />}>Edit</Button>
-                <Button startIcon={<AppRegistrationIcon />}>Register</Button>
+                <Button startIcon={<EditIcon />} onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>
+                <Button startIcon={<AppRegistrationIcon />} onClick={() => setShowRegisterForm(!showRegisterForm)}>Register</Button>
             </CardActions>
+            {showEditForm ? <TournamentEditForm id={tournament.id} /> : null}
+            {showRegisterForm ? <RegistrationForm players={players} tournament={tournament} /> : null}
         </Card>
     )
 }

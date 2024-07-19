@@ -203,7 +203,7 @@ class Registrations(Resource):
 
         try:
             new_registration = Registration(
-                player_id = data['player_id'],
+                player_id = int(data['player_id']),
                 tournament_id = data['tournament_id']
             )
 

@@ -7,11 +7,13 @@ import { Box, Typography, Accordion, AccordionSummary, AccordionDetails } from '
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import RegistrationCard from '../components/RegistrationCard'
 
-function PlayerDetail() {
+function PlayerDetail({reg}) {
 
     const params = useParams()
     const [player, setPlayer] = useState({})
     const {registrations, setRegistrations} = useOutletContext()
+
+    console.log(reg)
 
     useEffect(() => {
         fetch(`/players/${params.id}`)
@@ -20,7 +22,7 @@ function PlayerDetail() {
     }, [params.id])
 
     const player_cards = player.ownerships ? player.ownerships.map(card => card.cards) : []
-    const player_registrations = registrations ? registrations.filter(reg => reg.player_id === player.id): []
+    const player_registrations = registrations.filter(reg => reg.player_id === player.id)
 
     function handleDeleteReg(id){
         fetch(`/registrations/${id}`, {

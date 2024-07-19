@@ -23,6 +23,7 @@ function Players() {
                                 <PlayerCard 
                                     key = {player.id} 
                                     player = {player} 
+                                    registrations={player.registrations}
                                 />
                             </Grid2>
                         )
