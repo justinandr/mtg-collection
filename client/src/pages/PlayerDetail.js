@@ -11,7 +11,7 @@ function PlayerDetail() {
 
     const params = useParams()
     const [player, setPlayer] = useState({})
-    const {registrations, setRegistrations} = useOutletContext()
+    const {setRegistrations} = useOutletContext()
 
     useEffect(() => {
         fetch(`/players/${params.id}`)

@@ -11,7 +11,6 @@ function CardSearchForm() {
     const [rarityOpen, setRarityOpen] = useState(false)
     const [typeOpen, setTypeOpen] = useState(false)
     const [searchResults, setSearchResults] = useState([])
-    const [showResults, setShowResults] = useState(false)
 
     const types = ["Artifact", "Battle", "Conspiracy" ,"Creature" ,"Dragon" ,
         "Elemental", "Enchantment", "Goblin", "Hero", "instant", "Instant", 
@@ -53,11 +52,7 @@ function CardSearchForm() {
         })
         .then(res => res.json())
         .then(data => setSearchResults(data))
-        setShowResults(true)
-        console.log(searchResults)
     }
-
-    console.log(showResults)
 
     return (
         <>
