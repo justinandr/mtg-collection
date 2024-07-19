@@ -5,6 +5,7 @@ import TournamentCard from '../components/TournamentCard'
 import { Box, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import TournamentEditForm from '../components/TournamentEditForm'
+import AddTournamentForm from '../components/AddTournamentForm'
 
 function Tournaments() {
 
@@ -28,7 +29,7 @@ function Tournaments() {
                 <Typography variant='h2'>Tournaments</Typography>
                 <Button variant='outlined' onClick={() => setShowAddTournamentForm(!showAddTournamentForm)}>Add Tournament</Button>
                 {showAddTournamentForm ?
-                     <TournamentEditForm />
+                     <AddTournamentForm />
                      : null}
                 <Box sx={{width: '100%', mt: '10px'}}>
                     <Grid2 container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>

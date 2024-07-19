@@ -6,6 +6,7 @@ from config import app, db, api
 from models import *
 import re
 from mtgsdk import Card as mtgcard
+from datetime import date
 
 class Home(Resource):
     def get(self):
@@ -152,7 +153,7 @@ class Tournaments(Resource):
         try:
             new_tournament = Tournament(
                 name = data['name'],
-                date = data['date'],
+                date = date(data['year'], data['month'], data['day']),
                 location = data['location']
             )
 
@@ -177,8 +178,12 @@ class TournamentsById(Resource):
         data = request.get_json()
 
         if tournament:
-            for attr in data:
-                setattr(tournament, attr, data[attr])
+            if data['name']:
+                tournament.name = data['name']
+            if data['year']:
+                tournament.date = date(data['year'], data['month'], data['day'])
+            if data['location']:
+                tournament.location = data['location']
             
             db.session.add(tournament)
             db.session.commit()

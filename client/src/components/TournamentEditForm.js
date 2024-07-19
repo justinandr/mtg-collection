@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs'
+import { useOutletContext } from 'react-router-dom'
+
 
 function TournamentEditForm({id}) {
 
     const [name, setName] = useState('')
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(dayjs())
     const [location, setLocation] = useState('')
+    const {tournaments, setTournaments} = useOutletContext()
 
     function handleSubmit(event){
         event.preventDefault()
         const formData = {
             name: name, 
-            date: date,
+            year: date.$y,
+            month: date.$M,
+            day: date.$D,
             location: location
         }
 
@@ -24,7 +32,18 @@ function TournamentEditForm({id}) {
             body: JSON.stringify(formData)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => setTournaments(tournaments.map(tournament => {
+            if(tournament.id !== id){
+                return tournament
+            }
+            else {
+                return data
+            }
+        })))
+        
+        setName('')
+        setDate(dayjs())
+        setLocation('')
     }
 
     return (
@@ -53,12 +72,14 @@ function TournamentEditForm({id}) {
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                        <TextField
-                            fullWidth
-                            label='Date'
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)} 
-                        />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                fullWidth
+                                label='Date'
+                                value={date}
+                                onChange={(newValue) => setDate(newValue)}
+                            />
+                        </LocalizationProvider>
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField

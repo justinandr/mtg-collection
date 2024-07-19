@@ -1,22 +1,29 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import dayjs from 'dayjs'
+import { useOutletContext } from 'react-router-dom'
 
 function AddTournamentForm() {
 
     const [name, setName] = useState('')
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState(dayjs())
     const [location, setLocation] = useState('')
+    const {tournaments, setTournaments} = useOutletContext()
 
     function handleSubmit(event){
         event.preventDefault()
         const formData = {
             name: name, 
-            date: date,
+            year: date.$y,
+            month: date.$M,
+            day: date.$D,
             location: location
         }
 
-        fetch(`/tournaments/${id}`, {
+        fetch('/tournaments', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +31,11 @@ function AddTournamentForm() {
             body: JSON.stringify(formData)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => setTournaments([...tournaments, data]))
+
+        setName('')
+        setDate(dayjs())
+        setLocation('')
     }
 
     return (
@@ -33,7 +44,7 @@ function AddTournamentForm() {
                 marginTop: 8,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'left',
             }}
         >
             <Typography variant='h6'>Edit Tournament</Typography>
@@ -45,7 +56,7 @@ function AddTournamentForm() {
             >
                 <Grid2 container spacing={2}>
                     <Grid2 xs={12}>
-                        <TextField 
+                        <TextField
                             fullWidth
                             label='Name'
                             value={name}
@@ -53,12 +64,14 @@ function AddTournamentForm() {
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                        <TextField
-                            fullWidth
-                            label='Date'
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)} 
-                        />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker 
+                                fullWidth
+                                label='Date'
+                                value={date}
+                                onChange={(newValue) => setDate(newValue)}
+                            />
+                        </LocalizationProvider>
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField
