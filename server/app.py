@@ -4,6 +4,8 @@ from flask import request, make_response
 from flask_restful import Resource
 from config import app, db, api
 from models import *
+import re
+from mtgsdk import Card as mtgcard
 
 class Home(Resource):
     def get(self):
@@ -78,6 +80,22 @@ class CardsById(Resource):
             return card.to_dict(), 200
         
         return {"error": "404 Not Found"}, 404
+    
+class CardSearch(Resource):
+    def post(self):
+        data = request.get_json()
+        
+        cards = Card.query.filter_by(name = data['name']).all()
+
+        if cards:
+            card_response = [card.to_dict() for card in cards]
+            
+            return card_response, 200
+        
+        return {"error": "404 Not Found"}, 404
+
+            
+
     
 class Ownerships(Resource):
     def get(self):
@@ -154,6 +172,20 @@ class TournamentsById(Resource):
             db.session.commit()
 
             return make_response('', 204)
+    def patch(self, id):
+        tournament = Tournament.query.filter_by(id = id).first()
+        data = request.get_json()
+
+        if tournament:
+            for attr in data:
+                setattr(tournament, attr, data[attr])
+            
+            db.session.add(tournament)
+            db.session.commit()
+
+            return make_response(tournament.to_dict(), 200)
+        
+        return {"error": "404 Not Found"}, 404
 
 class Registrations(Resource):
     def get(self):
@@ -196,6 +228,7 @@ api.add_resource(Home, '/')
 api.add_resource(Players, '/players')
 api.add_resource(PlayersById, '/players/<int:id>')
 api.add_resource(CardsById, '/cards/<int:id>')
+api.add_resource(CardSearch, '/cards/search')
 api.add_resource(Ownerships, '/ownerships')
 api.add_resource(OwnershipsById, '/ownerships/<int:id>')
 api.add_resource(Tournaments, '/tournaments')
