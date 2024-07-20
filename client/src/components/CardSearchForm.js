@@ -73,7 +73,7 @@ function CardSearchForm() {
             <Box
             noValidate
             component='form'
-            sx={{mt: '20px'}}
+            sx={{mt: '20px', alignItems: 'center', display: 'flex', flexDirection: 'column'}}
             onSubmit={handleSubmit}
             >
                 <Grid2 container spacing={2}>
@@ -112,10 +112,10 @@ function CardSearchForm() {
             </Box>
         </Box> 
             <Box sx={{width: '100%', mt: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <Grid2 container rowSpacing={4} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
+                <Grid2 container rowSpacing={4} sx={{alignItems: 'center'}} >
                     {Array.isArray(searchResults) ? cardsToDisplay.map(card => {
                         return (
-                            <Grid2 key={card.id} xs={3}>
+                            <Grid2 key={card.id} xs={3} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <CardCard key={card.id} card={card} />
                             </Grid2>
                         )

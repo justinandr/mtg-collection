@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker, StaticDatePicker, DateCalendar } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 import { useOutletContext } from 'react-router-dom'
 
@@ -55,7 +54,7 @@ function TournamentEditForm({id}) {
                 alignItems: 'left',
             }}
         >
-            <Typography variant='h6'>Add Tournament</Typography>
+            <Typography variant='h6'>Edit Tournament</Typography>
             <Box
                 noValidate
                 component='form'
@@ -72,7 +71,7 @@ function TournamentEditForm({id}) {
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                            <DatePicker
+                            <DateCalendar
                                 fullWidth
                                 label='Date'
                                 value={date}

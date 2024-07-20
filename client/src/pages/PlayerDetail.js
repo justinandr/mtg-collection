@@ -68,11 +68,11 @@ function PlayerDetail() {
                     <Typography variant='h6'>Cards</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Box sx={{width: '100%'}}>
-                        {player ? <Grid2 container rowSpacing={5} columnSpacing={5}>
+                    <Box sx={{width: '100%', mt: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                        {player ? <Grid2 container rowSpacing={4} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
                             {player_cards.map(card => {
                                 return (
-                                    <Grid2 key={card.id} xs={2}>
+                                    <Grid2 key={card.id} xs={2} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                         <CardCard
                                             key = {card.id} 
                                             card = {card} 
