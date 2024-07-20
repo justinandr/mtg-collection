@@ -79,7 +79,7 @@ class Tournament(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String, nullable = False)
-    date = db.Column(db.DateTime, nullable = False)
+    date = db.Column(db.Date, nullable = False)
     location = db.Column(db.String, nullable = False)
 
     registrations = db.relationship('Registration', back_populates = 'tournaments', cascade = 'all, delete-orphan')

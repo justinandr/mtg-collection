@@ -38,10 +38,10 @@ function RegistrationForm({players, tournament}) {
     return (
         <Box
             sx={{
-                marginTop: 8,
+                marginTop: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'left',
             }}
         >
             <Typography variant='h6'>Register a Player</Typography>

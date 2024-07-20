@@ -1,8 +1,8 @@
-"""add models outline
+"""create db
 
-Revision ID: 2891898e7f6a
-Revises: 82ccc8d103bc
-Create Date: 2024-07-07 12:40:22.978556
+Revision ID: e6478e2f5260
+Revises: 
+Create Date: 2024-07-19 22:07:35.061411
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2891898e7f6a'
-down_revision = '82ccc8d103bc'
+revision = 'e6478e2f5260'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -25,7 +25,8 @@ def upgrade():
     sa.Column('rarity', sa.String(), nullable=False),
     sa.Column('set', sa.String(), nullable=False),
     sa.Column('set_name', sa.String(), nullable=False),
-    sa.Column('multiverse_id', sa.Integer(), nullable=False),
+    sa.Column('multiverse_id', sa.Integer(), nullable=True),
+    sa.Column('image_url', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('players',
@@ -37,7 +38,7 @@ def upgrade():
     op.create_table('tournaments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('date', sa.Date(), nullable=False),
     sa.Column('location', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

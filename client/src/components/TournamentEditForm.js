@@ -62,7 +62,7 @@ function TournamentEditForm({id}) {
                 sx={{mt: '10px'}}
                 onSubmit={handleSubmit}
             >
-                <Grid2 container spacing={2}>
+                <Grid2 container spacing={1}>
                     <Grid2 xs={12}>
                         <TextField 
                             fullWidth
@@ -72,14 +72,12 @@ function TournamentEditForm({id}) {
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 fullWidth
                                 label='Date'
                                 value={date}
                                 onChange={(newValue) => setDate(newValue)}
                             />
-                        </LocalizationProvider>
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField
