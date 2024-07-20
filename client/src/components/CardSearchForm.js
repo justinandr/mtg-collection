@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, TextField, Select, Button, MenuItem, Typography, InputLabel, Pagination } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
 import CardCard from '../components/CardCard'
@@ -9,6 +9,9 @@ function CardSearchForm() {
     const [rarity, setRarity] = useState('')
     const [rarityOpen, setRarityOpen] = useState(false)
     const [searchResults, setSearchResults] = useState([])
+    const [cardsToDisplay, setCardsToDisplay] = useState([])
+    const [page, setPage] = useState(0)
+    const cardsPerPage = 24
 
     const rarities = ['Common', 'Uncommon', 'Rare', 'Mythic']
 
@@ -18,6 +21,10 @@ function CardSearchForm() {
 
     function handleRarityOpen(){
         setRarityOpen(true)
+    }
+
+    function handlePageChange(event, value){
+        setPage(value)
     }
 
     function handleSubmit(event){
@@ -32,8 +39,6 @@ function CardSearchForm() {
             rarity: rarity,
         }
 
-        console.log(formData)
-
         fetch('/cards/search', {
             method: 'POST',
             headers: {
@@ -47,6 +52,12 @@ function CardSearchForm() {
         setName('')
         setRarity('')
     }
+
+    console.log(searchResults)
+
+    useEffect(() => {
+        setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
+    }, [page, searchResults])
 
     return (
         <>
@@ -102,7 +113,7 @@ function CardSearchForm() {
         </Box> 
             <Box sx={{width: '100%', mt: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <Grid2 container rowSpacing={4} columnSpacing={{ xs: 2, sm: 2, md: 3 }}>
-                    {Array.isArray(searchResults) ? searchResults.map(card => {
+                    {Array.isArray(searchResults) ? cardsToDisplay.map(card => {
                         return (
                             <Grid2 key={card.id} xs={3}>
                                 <CardCard key={card.id} card={card} />
@@ -110,6 +121,13 @@ function CardSearchForm() {
                         )
                     }) : <Typography variant='h6'>No Matches Found...</Typography>}
                 </Grid2>
+                <Pagination 
+                    count={parseInt(searchResults.length / cardsPerPage)}
+                    variant='outlined'
+                    page={page}
+                    onChange={handlePageChange}
+                    sx={{mt: '25px'}}
+                />
             </Box>
         </>
     )
