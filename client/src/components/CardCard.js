@@ -7,7 +7,8 @@ function CardCard({card}) {
             <CardMedia
                 component="img"
                 alt={card.name}
-                height="310"
+                height={'310'}
+                width={'223'}
                 image={card.image_url}
             />
             <CardContent>

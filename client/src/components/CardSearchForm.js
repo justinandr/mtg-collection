@@ -22,15 +22,22 @@ function CardSearchForm() {
 
     function handleSubmit(event){
         event.preventDefault()
+
+        if (name === '' && rarity === ''){
+            return null
+        }
+
         const formData = {
             name: name,
             rarity: rarity,
         }
 
+        console.log(formData)
+
         fetch('/cards/search', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
         })

@@ -89,7 +89,9 @@ class CardSearch(Resource):
         elif data['name'] and not data['rarity']:
             cards = Card.query.filter_by(name = data['name']).all()
         elif not data['name'] and data['rarity']:
-            cards = Card.query.filter_by(rarity = data['rarity'])
+            cards = Card.query.filter_by(rarity = data['rarity']).all()
+        else:
+            return {'message': 'Thanks?'}, 204
         if cards:
             card_response = [card.to_dict() for card in cards]
             

@@ -11,7 +11,19 @@ function AddTournamentForm() {
     const [name, setName] = useState('')
     const [date, setDate] = useState(dayjs())
     const [location, setLocation] = useState('')
+    const [nameError, setNameError] = useState(false)
     const {tournaments, setTournaments} = useOutletContext()
+
+    function handleNameChange(e){
+        setName(e.target.value)
+
+        if (e.target.value.length < 10){
+            setNameError(true)
+        }
+        else{
+            setNameError(false)
+        }
+    }
 
     function handleSubmit(event){
         event.preventDefault()
@@ -57,15 +69,19 @@ function AddTournamentForm() {
                 <Grid2 container spacing={2}>
                     <Grid2 xs={12}>
                         <TextField
+                            required
                             fullWidth
                             label='Name'
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            error={nameError}
+                            helperText={nameError ? 'Name must greater than 10 characters': ''}
+                            onChange={(e) => handleNameChange(e)}
                         />
                     </Grid2>
                     <Grid2 xs={12}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker 
+                                required
                                 fullWidth
                                 label='Date'
                                 value={date}
@@ -75,6 +91,7 @@ function AddTournamentForm() {
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField
+                            required
                             fullWidth
                             label='Location'
                             value={location}

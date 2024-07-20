@@ -9,7 +9,7 @@ function Home() {
     return (
         <>
             <NavBar />
-            <Box maxWidth='100%' sx={{m: 'auto'}} >
+            <Box maxWidth='100%' sx={{mt: '150px'}} >
                 <Typography textAlign={'center'} variant='h2' sx={{mt: '50px'}}>Welcome to MTG Collections</Typography>
                 <Grid2 container spacing={2} sx={{mt: '50px', ml: '50px', mr: '50px'}}>
                     <Grid2 xs={4}>

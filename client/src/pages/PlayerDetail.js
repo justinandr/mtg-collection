@@ -45,7 +45,7 @@ function PlayerDetail() {
                         {player.registrations ? <Grid2 container rowSpacing={5} columnSpacing={5}>
                             {player.registrations.map(registration => {
                                 return (
-                                    <Grid2 key={registration.id} xs={16}>
+                                    <Grid2 key={registration.id} xs={4}>
                                         <RegistrationCard 
                                             key={registration.id}
                                             regId={registration.id}
@@ -72,7 +72,7 @@ function PlayerDetail() {
                         {player ? <Grid2 container rowSpacing={5} columnSpacing={5}>
                             {player_cards.map(card => {
                                 return (
-                                    <Grid2 key={card.id} xs={3}>
+                                    <Grid2 key={card.id} xs={2}>
                                         <CardCard
                                             key = {card.id} 
                                             card = {card} 
