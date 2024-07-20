@@ -25,6 +25,7 @@ function RegistrationForm({players, tournament}) {
         })
         .then(res => res.json())
         .then(data => setRegistrations([...registrations, data]))
+        setPlayer('')
     }
 
     function handlePlayersClose(){

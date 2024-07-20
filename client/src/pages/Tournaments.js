@@ -30,7 +30,7 @@ function Tournaments() {
                     <Grid2 container rowSpacing={1} columnSpacing={{ xs: 3, sm: 2, md: 3 }}>
                         {tournaments.map(tournament => {
                             return (
-                                <Grid2 key={tournament.id} xs={4}>
+                                <Grid2 key={tournament.id} xs={6}>
                                     <TournamentCard 
                                         key = {tournament.id} 
                                         tournament = {tournament}
