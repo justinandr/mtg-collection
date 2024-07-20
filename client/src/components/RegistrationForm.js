@@ -42,7 +42,7 @@ function RegistrationForm({players, tournament}) {
                 marginTop: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'left',
+                alignItems: 'center',
             }}
         >
             <Typography variant='h6'>Register a Player</Typography>
@@ -52,13 +52,13 @@ function RegistrationForm({players, tournament}) {
                 sx={{mt: '10px'}}
                 onSubmit={handleSubmit}
             >
-                <Grid2 container spacing={1}>
+                <Grid2 container>
                     <Grid2 xs={12} sm={12}>
                         <InputLabel id='players-select'>Players</InputLabel>
                         <Select
+                            sx={{width: 1}}
                             labelId='players-select'
                             id='players'
-                            fullWidth
                             label='Players'
                             open={playersOpen}
                             onClose={handlePlayersClose}
@@ -79,7 +79,7 @@ function RegistrationForm({players, tournament}) {
                         </Select>
                     </Grid2>
                     <Grid2 xs={12}>
-                        <Button fullWidth type='submit' variant='contained' sx={{mb: '5px'}}>Submit</Button>
+                        <Button fullWidth type='submit' variant='contained' sx={{mb: '15px'}}>Submit</Button>
                     </Grid2>
                 </Grid2>
             </Box>

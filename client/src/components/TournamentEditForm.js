@@ -51,7 +51,7 @@ function TournamentEditForm({id}) {
                 marginTop: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'left',
+                alignItems: 'center',
             }}
         >
             <Typography variant='h6'>Edit Tournament</Typography>
@@ -61,22 +61,21 @@ function TournamentEditForm({id}) {
                 sx={{mt: '10px'}}
                 onSubmit={handleSubmit}
             >
-                <Grid2 container spacing={1}>
+                <Grid2 container >
+                    <Grid2 xs={12} sm={12}>
+                        <DateCalendar
+                            label='Date'
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
+                        />
+                    </Grid2>
                     <Grid2 xs={12}>
-                        <TextField 
-                            fullWidth
+                        <TextField
+                            fullWidth 
                             label='Name'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                    </Grid2>
-                    <Grid2 xs={12}>
-                            <DateCalendar
-                                fullWidth
-                                label='Date'
-                                value={date}
-                                onChange={(newValue) => setDate(newValue)}
-                            />
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField
@@ -87,7 +86,7 @@ function TournamentEditForm({id}) {
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                        <Button fullWidth type='submit' variant='contained' sx={{mb: '5px'}}>Submit</Button>
+                        <Button fullWidth type='submit' variant='contained' sx={{mb: '15px'}}>Submit</Button>
                     </Grid2>
                 </Grid2>
             </Box>
