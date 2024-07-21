@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box, TextField, Select, Button, MenuItem, Typography, InputLabel, Pagination } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
+import LoadingButton from '@mui/lab/LoadingButton'
 import CardCard from '../components/CardCard'
 
 function CardSearchForm() {
@@ -30,6 +31,7 @@ function CardSearchForm() {
 
     function handleSubmit(event){
         event.preventDefault()
+        setLoading(true)
 
         if (name === '' && rarity === ''){
             return null
@@ -56,10 +58,12 @@ function CardSearchForm() {
     }
 
     useEffect(() => {
+        setLoading(false)
         return (Array.isArray(searchResults) ? 
             setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
             : null)
     }, [page, searchResults])
+
 
     return (
         <>
@@ -108,7 +112,7 @@ function CardSearchForm() {
                         </Select>
                     </Grid2>
                     <Grid2 xs={12} sx={{mt: '15px'}}>
-                        <Button type='submit' fullWidth variant='contained'>Submit</Button>
+                        <LoadingButton loading={loading} type='submit' fullWidth variant='contained'>Submit</LoadingButton>
                     </Grid2>
                 </Grid2>
             </Box>
