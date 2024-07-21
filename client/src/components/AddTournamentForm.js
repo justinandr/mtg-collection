@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { DateCalendar, LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs'
 import { useOutletContext } from 'react-router-dom'
@@ -59,14 +59,23 @@ function AddTournamentForm() {
                 alignItems: 'left',
             }}
         >
-            <Typography variant='h6'>Edit Tournament</Typography>
+            <Typography textAlign={'center'} variant='h6'>Edit Tournament</Typography>
             <Box
                 noValidate
                 component='form'
-                sx={{mt: '10px'}}
                 onSubmit={handleSubmit}
+                sx={{mt: '10px', alignItems: 'center', display: 'flex', flexDirection: 'column'}}
             >
                 <Grid2 container spacing={2}>
+                    <Grid2 xs={12}>
+                        <DateCalendar 
+                            required
+                            fullWidth
+                            label='Date'
+                            value={date}
+                            onChange={(newValue) => setDate(newValue)}
+                        />
+                    </Grid2>
                     <Grid2 xs={12}>
                         <TextField
                             required
@@ -77,17 +86,6 @@ function AddTournamentForm() {
                             helperText={nameError ? 'Name must greater than 10 characters': ''}
                             onChange={(e) => handleNameChange(e)}
                         />
-                    </Grid2>
-                    <Grid2 xs={12}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker 
-                                required
-                                fullWidth
-                                label='Date'
-                                value={date}
-                                onChange={(newValue) => setDate(newValue)}
-                            />
-                        </LocalizationProvider>
                     </Grid2>
                     <Grid2 xs={12}>
                         <TextField
