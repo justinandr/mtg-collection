@@ -63,6 +63,7 @@ function CardSearchForm() {
         if (Array.isArray(searchResults)){
             setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
         }
+
     }, [page, searchResults])
 
 
@@ -119,8 +120,16 @@ function CardSearchForm() {
             </Box>
         </Box> 
             <Box sx={{width: '100%', mt: '25px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <Grid2 container columnSpacing={4} rowSpacing={4} sx={{alignItems: 'center'}} >
+                <Grid2 container columnSpacing={4} rowSpacing={4} sx={{alignItems: 'center'}}>
                     {Array.isArray(searchResults) ? cardsToDisplay.map(card => {
+
+                        if (cardsToDisplay.length < 4){
+                            return (
+                                <Grid2 key={card.id} xs={6} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <CardCard key={card.id} card={card} />
+                                </Grid2>
+                            )
+                        }
                         return (
                             <Grid2 key={card.id} xs={3} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <CardCard key={card.id} card={card} />
