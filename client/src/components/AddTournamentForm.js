@@ -58,7 +58,7 @@ function AddTournamentForm() {
                 alignItems: 'left',
             }}
         >
-            <Typography textAlign={'center'} variant='h6'>Edit Tournament</Typography>
+            <Typography textAlign={'center'} variant='h6'>Add Tournament</Typography>
             <Box
                 noValidate
                 component='form'

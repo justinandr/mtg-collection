@@ -52,7 +52,7 @@ function RegistrationForm({players, tournament}) {
                 sx={{mt: '10px'}}
                 onSubmit={handleSubmit}
             >
-                <Grid2 container>
+                <Grid2 container spacing={2}>
                     <Grid2 xs={12} sm={12}>
                         <InputLabel id='players-select'>Players</InputLabel>
                         <Select
