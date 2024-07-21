@@ -8,6 +8,7 @@ function CardSearchForm() {
     const [name, setName] = useState('')
     const [rarity, setRarity] = useState('')
     const [rarityOpen, setRarityOpen] = useState(false)
+    const [loading, setLoading] = useState(false) //implement loading button on this form
     const [searchResults, setSearchResults] = useState([])
     const [cardsToDisplay, setCardsToDisplay] = useState([])
     const [page, setPage] = useState(0)
@@ -51,12 +52,15 @@ function CardSearchForm() {
 
         setName('')
         setRarity('')
+        setPage(0)
     }
 
     console.log(searchResults)
 
     useEffect(() => {
-        setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
+        return (Array.isArray(searchResults) ? 
+            setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
+            : null)
     }, [page, searchResults])
 
     return (
@@ -121,13 +125,14 @@ function CardSearchForm() {
                         )
                     }) : <Typography variant='h6'>No Matches Found...</Typography>}
                 </Grid2>
-                <Pagination 
+                {searchResults.length > 24 ? 
+                    <Pagination 
                     count={parseInt(searchResults.length / cardsPerPage)}
                     variant='outlined'
                     page={page}
                     onChange={handlePageChange}
                     sx={{mt: '25px'}}
-                />
+                /> : null}
             </Box>
         </>
     )

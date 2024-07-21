@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, TextField, Button, Typography } from '@mui/material'
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2'
-import { DatePicker, StaticDatePicker, DateCalendar } from '@mui/x-date-pickers'
+import { DateCalendar } from '@mui/x-date-pickers'
 import dayjs from 'dayjs'
 import { useOutletContext } from 'react-router-dom'
 
