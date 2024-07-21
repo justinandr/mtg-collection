@@ -55,8 +55,6 @@ function CardSearchForm() {
         setPage(0)
     }
 
-    console.log(searchResults)
-
     useEffect(() => {
         return (Array.isArray(searchResults) ? 
             setCardsToDisplay(searchResults.slice(page * cardsPerPage, page * cardsPerPage + cardsPerPage))
