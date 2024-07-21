@@ -19,22 +19,6 @@ class Players(Resource):
             return players_response, 200
         
         return {"error": "404 Not Found"}, 404 
-    
-    def post(self):
-        data = request.get_json()
-
-        try:
-            new_player = Player(
-                name = data['name'],
-                tournaments_played = data['tournaments_played']
-            )
-
-            db.session.add(new_player)
-            db.session.commit()
-
-            return make_response(new_player.to_dict(), 201)
-        except Exception as exc:
-            return {"error": f"{exc}"}, 400
         
 class PlayersById(Resource):
     def get(self, id):
@@ -44,32 +28,6 @@ class PlayersById(Resource):
             return player.to_dict(), 200
         
         return {"error": "404 Not Found"}, 404 
-    
-    def patch(self, id):
-        player = Player.query.filter_by(id = id).first()
-        data = request.get_json()
-
-        if player:
-            for attr in data:
-                setattr(player, attr, data[attr])
-
-            db.session.add(player)
-            db.session.commit()
-
-            return make_response(player.to_dict(), 200)
-        
-        return {"error": "404 Not Found"}, 404
-    
-    def delete(self, id):
-        player = Player.query.filter_by(id = id)
-
-        if player:
-            db.session.delete(player)
-            db.session.commitj()
-
-            return make_response('', 204)
-        
-        return {"error": "404 Not Found"}, 404
     
 class CardsById(Resource):
     def get(self, id):
@@ -98,9 +56,6 @@ class CardSearch(Resource):
             return card_response, 200
         
         return {"error": "404 Not Found"}, 404
-
-            
-
     
 class Ownerships(Resource):
     def get(self):

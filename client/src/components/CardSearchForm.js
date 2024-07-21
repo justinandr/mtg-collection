@@ -9,7 +9,7 @@ function CardSearchForm() {
     const [name, setName] = useState('')
     const [rarity, setRarity] = useState('')
     const [rarityOpen, setRarityOpen] = useState(false)
-    const [loading, setLoading] = useState(false) //implement loading button on this form
+    const [loading, setLoading] = useState(false)
     const [searchResults, setSearchResults] = useState([])
     const [cardsToDisplay, setCardsToDisplay] = useState([])
     const [page, setPage] = useState(0)
