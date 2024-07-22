@@ -17,7 +17,7 @@ function PlayerDetail() {
         fetch(`/players/${params.id}`)
         .then(res => res.json())
         .then(data => setPlayer(data))
-    }, [params.id])
+    }, [params.id, player.registrations])
 
     const player_cards = player.ownerships ? player.ownerships.map(card => card.cards) : []
 

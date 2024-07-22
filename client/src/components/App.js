@@ -14,7 +14,7 @@ function App() {
         fetch('/players')
         .then(res => res.json())
         .then(data => setPlayers(data))
-    }, [])
+    }, [players.registrations])
 
     useEffect(() => {
         fetch('/tournaments')
