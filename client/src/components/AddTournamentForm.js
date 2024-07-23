@@ -10,17 +10,17 @@ function AddTournamentForm() {
     const [name, setName] = useState('')
     const [date, setDate] = useState(dayjs())
     const [location, setLocation] = useState('')
-    const [nameError, setNameError] = useState(false)
+    const [locationError, setLocationError] = useState(false)
     const {tournaments, setTournaments} = useOutletContext()
 
-    function handleNameChange(e){
-        setName(e.target.value)
+    function handleLocationChange(e){
+        setLocation(e.target.value)
 
         if (e.target.value.length < 10){
-            setNameError(true)
+            setLocationError(true)
         }
         else{
-            setNameError(false)
+            setLocationError(false)
         }
     }
 
@@ -69,7 +69,6 @@ function AddTournamentForm() {
                     <Grid2 xs={12}>
                         <DateCalendar 
                             required
-                            fullWidth
                             label='Date'
                             value={date}
                             onChange={(newValue) => setDate(newValue)}
@@ -81,9 +80,7 @@ function AddTournamentForm() {
                             fullWidth
                             label='Name'
                             value={name}
-                            error={nameError}
-                            helperText={nameError ? 'Name must greater than 10 characters': ''}
-                            onChange={(e) => handleNameChange(e)}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </Grid2>
                     <Grid2 xs={12}>
@@ -92,11 +89,13 @@ function AddTournamentForm() {
                             fullWidth
                             label='Location'
                             value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            error={locationError}
+                            helperText={locationError ? 'Location must be greater than 10 characters': ''}
+                            onChange={handleLocationChange}
                         />
                     </Grid2>
                     <Grid2 xs={12}>
-                        <Button fullWidth type='submit' variant='contained' sx={{mb: '5px'}}>Submit</Button>
+                        <Button fullWidth disabled={locationError} type='submit' variant='contained' sx={{mb: '5px'}}>Submit</Button>
                     </Grid2>
                 </Grid2>
             </Box>
