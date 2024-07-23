@@ -43,7 +43,7 @@ class CardSearch(Resource):
         data = request.get_json()
         
         if data['name'] and data['rarity']:
-            cards = Card.query.flter(Card.name.contains(data['name'])).filter_by(rarity = data['rarity']).all()
+            cards = Card.query.filter(Card.name.contains(data['name'])).filter_by(rarity = data['rarity']).all()
         elif data['name'] and not data['rarity']:
             cards = Card.query.filter(Card.name.contains(data['name'])).all()
         elif not data['name'] and data['rarity']:
