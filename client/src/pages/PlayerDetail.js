@@ -11,13 +11,13 @@ function PlayerDetail() {
 
     const params = useParams()
     const [player, setPlayer] = useState({})
-    const {setRegistrations} = useOutletContext()
+    const {registrations, setRegistrations} = useOutletContext()
 
     useEffect(() => {
         fetch(`/players/${params.id}`)
         .then(res => res.json())
         .then(data => setPlayer(data))
-    }, [params.id, player.registrations])
+    }, [params.id, registrations])
 
     const player_cards = player.ownerships ? player.ownerships.map(card => card.cards) : []
 
