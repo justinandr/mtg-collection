@@ -3,6 +3,16 @@ import { Outlet } from 'react-router-dom'
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import NavBar from "./NavBar";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
 
 function App() {
 
@@ -29,9 +39,13 @@ function App() {
     }, [players.registrations])
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Outlet context={{players, setPlayers, tournaments, setTournaments, registrations, setRegistrations}} />
-    </LocalizationProvider>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <NavBar />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Outlet context={{players, setPlayers, tournaments, setTournaments, registrations, setRegistrations}} />
+        </LocalizationProvider>
+    </ThemeProvider>
   )
 }
 

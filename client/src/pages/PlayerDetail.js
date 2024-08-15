@@ -29,7 +29,6 @@ function PlayerDetail() {
     }
     return (
         <>
-            <NavBar />
             <Typography gutterBottom variant='h2'>{player.name}</Typography>
             <Typography variant='h5' color='text.secondary'>Tournaments played: {player.tournaments_played}</Typography>
             <Accordion sx={{mt: '25px'}}>

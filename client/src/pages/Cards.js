@@ -5,7 +5,6 @@ import CardSearchForm from '../components/CardSearchForm'
 function Cards() {
   return (
     <>
-        <NavBar />
         <CardSearchForm />
     </>
   )

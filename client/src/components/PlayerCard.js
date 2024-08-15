@@ -6,7 +6,7 @@ function PlayerCard({player, registrations}) {
 
     return (
         <Box sx={{minWidth: 275}}>
-            <Card variant='outlined'>
+            <Card>
                 <CardActionArea component={Link} to={`/players/${player.id}`}>
                     <CardContent>
                         <Typography variant='h4' >{player.name}</Typography>
