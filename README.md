@@ -26,7 +26,7 @@ The database comes seeded with all MTG cards as well as test data in all other t
 
 While in the server directory run ```pipenv shell``` followed by ```python app.py``` 
 
-## React App
+## Client
 
 Navigate to the client directory and run ```npm start```
 
